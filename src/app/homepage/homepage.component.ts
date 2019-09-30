@@ -18,4 +18,15 @@ export class HomepageComponent implements OnInit {
     this.boards.push(this._trelloService.seedData());
   }
 
+  public addBoard() {
+    console.log('Adding new board');
+    
+    let newBoard: Board = new Board;
+    newBoard.id = this.boards.length + 1;
+    newBoard.task = Array();
+    newBoard.title = "New Board";
+    this.boards.push(newBoard);
+    
+    console.log('new board added');
+  }
 }
