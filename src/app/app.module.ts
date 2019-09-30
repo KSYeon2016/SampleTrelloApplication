@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { HomepageComponent } from './homepage/homepage.component';
+import { TrelloService } from './services/trello.service';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,7 @@ import { HomepageComponent } from './homepage/homepage.component';
     FormsModule,
     HttpModule
   ],
-  providers: [],
+  providers: [TrelloService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
