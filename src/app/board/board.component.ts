@@ -21,4 +21,9 @@ export class BoardComponent implements OnInit {
     this.board = this._trelloService.Boards.find(x => x.id == boardId);
   }
 
+  addSubTask(event) {
+    console.log("이벤트 발생");
+    console.log(event);
+  }
+
 }

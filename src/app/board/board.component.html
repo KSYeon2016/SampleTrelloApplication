@@ -3,6 +3,6 @@
 </div>
 <section *ngIf="board" id="main">
   <div *ngFor="let task of board.task" class="sortable-task">
-    <app-task [task]="task" [subTasks]="task.subtask"></app-task>
+    <app-task [task]="task" (onAddSubTask)="addSubTask($event)" [subTasks]="task.subtask"></app-task>
   </div>
 </section>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Task } from 'app/model/task';
 import { SubTask } from 'app/model/subtask';
 import { ActivatedRoute } from '@angular/router';
@@ -16,9 +16,24 @@ export class TaskComponent implements OnInit {
   @Input()
   subTasks: SubTask[];
 
-  constructor(private _route: ActivatedRoute, private _boardService: TrelloService) { }
+  @Output()
+  public onAddSubTask: EventEmitter<SubTask>;
+
+  addSubTaskText: string;
+
+  constructor(private _route: ActivatedRoute, private _boardService: TrelloService) { 
+    this.onAddSubTask = new EventEmitter();
+  }
 
   ngOnInit() {
+  }
+
+  addSubTask() {
+    this.subTasks = this.subTasks || [];
+    const newSubTask = <SubTask>{
+      title: this.addSubTaskText
+    };
+    this.onAddSubTask.emit(newSubTask);
   }
 
 }
