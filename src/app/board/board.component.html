@@ -1,3 +1,8 @@
-<p>
-  board works!
-</p>
+<div *ngIf="board" class="board-title">
+  <span [style.display]="editingTitle ? 'none' : ''" (click)="editTitle()">{{ board?.title }}</span>
+</div>
+<section *ngIf="board" id="main">
+  <div *ngFor="let task of board.task" class="sortable-task">
+    <app-task [task]="task" [subTasks]="task.subtask"></app-task>
+  </div>
+</section>

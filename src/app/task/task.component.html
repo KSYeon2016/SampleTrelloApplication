@@ -1,0 +1,10 @@
+<div class="task">
+  <div class="task-header">
+    <h4>{{task.title | uppercase}}</h4>
+  </div>
+  <ul class="subTask-list">
+    <li *ngFor="let subTask of subTasks ">
+      <app-subtask [subTask]="subTask"></app-subtask>
+    </li>
+  </ul>
+</div>

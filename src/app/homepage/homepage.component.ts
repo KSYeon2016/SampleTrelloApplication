@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Board } from 'app/model/board';
 import { TrelloService } from 'app/services/trello.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-homepage',
@@ -12,7 +13,7 @@ export class HomepageComponent implements OnInit {
   boards: Board[] = Array();
   errorMessage: string;
 
-  constructor(private _trelloService: TrelloService) { }
+  constructor(private _trelloService: TrelloService, private _router: Router) { }
 
   ngOnInit() {
     this.boards.push(this._trelloService.seedData());

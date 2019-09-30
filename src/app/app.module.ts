@@ -8,6 +8,8 @@ import { AppComponent } from './app.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { TrelloService } from './services/trello.service';
 import { BoardComponent } from './board/board.component';
+import { TaskComponent } from './task/task.component';
+import { SubtaskComponent } from './subtask/subtask.component';
 
 const appRoutes: Routes = [
   {path: 'board/:id', component: BoardComponent, pathMatch: 'full'},
@@ -18,7 +20,9 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     HomepageComponent,
-    BoardComponent
+    BoardComponent,
+    TaskComponent,
+    SubtaskComponent
   ],
   imports: [
     BrowserModule,
