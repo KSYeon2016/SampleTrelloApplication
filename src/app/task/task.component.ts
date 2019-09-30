@@ -18,16 +18,16 @@ export class TaskComponent implements OnInit {
   subTasks: SubTask[];
 
   @Output()
-  public onAddSubTask: EventEmitter<SubTask>;
+  public onAddsubTask: EventEmitter<SubTask>;
 
   boards: Board[];
   board: Board = new Board;
-  addSubTaskText: string;
+  addsubTaskText: string;
   editingtask = false;
   currentTitle: string;
 
   constructor(private el: ElementRef, private _route: ActivatedRoute, private _boardService: TrelloService) { 
-    this.onAddSubTask = new EventEmitter();
+    this.onAddsubTask = new EventEmitter();
   }
 
   ngOnInit() {
@@ -44,8 +44,59 @@ export class TaskComponent implements OnInit {
     };
   }
 
+  ////////// subtask 추가
+  addsubTaskOnBlur() {
+    if (this.addsubTaskText && this.addsubTaskText.trim() !== '') {
+      this.addsubTask();
+    }
+    this.clearAddsubTask();
+  }
+  
+  addsubTask() {  // subtask 배열이 없으면 생성 후 추가
+    this.subTasks = this.subTasks || [];
+    const newsubTask = <SubTask>{
+      title: this.addsubTaskText
+    };
+    let selectedtask: Task;
+    for (const v of this.board.task) {
+      if (v.id == this.task.id) {
+        selectedtask = v;
+        break;
+      }
+    }
+
+    if (selectedtask.subtask == undefined) {
+      selectedtask.subtask = new Array();
+    }
+    selectedtask.subtask.push(newsubTask);
+    this.subTasks = selectedtask.subtask;
+    this.onAddsubTask.emit(newsubTask);
+  }
+
+  addsubTaskOnEnter(event: KeyboardEvent) {
+    if (event.keyCode === 13) {
+      if (this.addsubTaskText && this.addsubTaskText.trim() !== '') {
+        this.addsubTask();
+        this.addsubTaskText = '';
+      } else {
+        this.clearAddsubTask();
+      }
+    } else if (event.keyCode === 27) {
+      this.clearAddsubTask();
+    }
+  }
+
+  enableAddsubTask() {
+    const input = this.el.nativeElement
+      .getElementsByClassName('add-subTask')[0]
+      .getElementsByTagName('input')[0];
+
+    setTimeout(function () { input.focus(); }, 0);
+  }
+
+  ////////// task 이름 변경
   clearAddsubTask() {
-    this.addSubTaskText = '';
+    this.addsubTaskText = '';
   }
 
   updatetaskOnBlur() {
