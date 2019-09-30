@@ -1,9 +1,9 @@
 <header>
   <nav>
-    <a class="btn">Homepage</a>
+    <a class="btn" [routerLink]="['']">Homepage</a>
     <a class="logo">Sample Trello Application</a>
   </nav>
 </header>
 <div id="content-wrapper">
-  <app-homepage></app-homepage>
+  <router-outlet></router-outlet>
 </div>
